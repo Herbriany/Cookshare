@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const express = require('express');
 const path = require('path');
 const favicon = require('serve-favicon');
@@ -19,7 +21,7 @@ const reviewsRouter = require('./routes/reviews');
 const app = express();
 
 // connect to database
-mongoose.connect('mongodb://localhost:27017/cookshare', {useNewUrlParser: true});
+mongoose.connect('mongodb://localhost:27017/cookshare', { useUnifiedTopology: true, useNewUrlParser: true });
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
