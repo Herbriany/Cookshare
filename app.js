@@ -21,7 +21,7 @@ const reviewsRouter = require('./routes/reviews');
 const app = express();
 
 // connect to database
-mongoose.connect('mongodb://localhost:27017/cookshare', { useUnifiedTopology: true, useNewUrlParser: true });
+mongoose.connect('mongodb://localhost:27017/cookshare-mapbox', { useUnifiedTopology: true, useNewUrlParser: true });
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
@@ -31,6 +31,7 @@ db.once('open', function() {
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+app.use(express.static('public'))
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -38,6 +39,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(methodOverride('_method'));
+
 
 // configure passport and sessions
 app.use(session({
