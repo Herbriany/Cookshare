@@ -1,6 +1,7 @@
 require('dotenv').config();
 
 const express = require('express');
+const engine = require('ejs-mate');
 const path = require('path');
 const favicon = require('serve-favicon');
 const logger = require('morgan');
@@ -21,13 +22,15 @@ const reviewsRouter = require('./routes/reviews');
 const app = express();
 
 // connect to database
-mongoose.connect('mongodb://localhost:27017/cookshare-mapbox', { useUnifiedTopology: true, useNewUrlParser: true });
+mongoose.connect('mongodb://localhost:27017/cookshare', { useUnifiedTopology: true, useNewUrlParser: true });
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
   console.log("we're connected")
 });
 
+// use ejs-locals for all ejs templates:
+app.engine('ejs', engine);
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');

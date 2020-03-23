@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://api.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.js"></script>
+    <link href="https://api.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.css" rel="stylesheet" />
+    <link href="/stylesheets/post-show.css" rel="stylesheet">
+</head>
+<body>
+    <%- body -%>
+    <script>
+        var post = <%- JSON.stringify(post) %>;
+    </script>
+    <script src="/javascripts/post-show.js"></script>
+</body>
+</html>

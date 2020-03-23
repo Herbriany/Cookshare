@@ -1,31 +1,4 @@
-<script src="https://api.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.js"></script>
-<link href="https://api.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.css" rel="stylesheet" />
-<style>
-	body { 
-        margin: 0; 
-        padding: 0; 
-    }
-	#map { 
-        height: 300px; 
-        width: 500px; 
-    }
-    .marker {
-        background-image: url('/images/mapbox-icon.png');
-        background-size: cover;
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-        cursor: pointer;
-    }
-    .mapboxgl-popup {
-        max-width: 200px;
-    }
-
-    .mapboxgl-popup-content {
-        text-align: center;
-        font-family: 'Open Sans', sans-serif;
-    }
-</style>
+<% layout('layouts/post-show-layout') -%>
 
 <h1><%= post.title %></h1>
 <div>Price: <%= post.price %></div>
@@ -47,26 +20,3 @@
         <input type="submit" value="Delete">
     </form>
 </div>
-
-<script>
-    var post = <%- JSON.stringify(post) %>;
-	mapboxgl.accessToken = 'pk.eyJ1IjoiYnJpbGFuZCIsImEiOiJjazdtMHF3aDEwY2IwM2RwaXJ4bzE2anh4In0.bvvBWjNmdiaNkDuaQA3s9g';
-    var map = new mapboxgl.Map({
-        container: 'map', // container id
-        style: 'mapbox://styles/mapbox/streets-v11', // stylesheet location
-        center: post.coordinates, // starting position [lng, lat]
-        zoom: 6 // starting zoom
-    });
-
-    // create a HTML element for each feature
-    var el = document.createElement('div');
-    el.className = 'marker';
-
-    // make a marker for each feature and add to the map
-    new mapboxgl.Marker(el)
-    .setLngLat(post.coordinates)
-    .setPopup(new mapboxgl.Popup({ offset: 25 }) // add popups
-    .setHTML('<h3>' + post.title + '</h3><p>' + post.location + '</p>'))
-    .addTo(map);
-
-</script>
