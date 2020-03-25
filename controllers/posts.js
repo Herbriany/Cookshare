@@ -11,12 +11,12 @@ cloudinary.config({
 module.exports = {
     async postIndex(req, res, next) {
         let posts = await Post.find({});
-        res.render('posts/index', { posts });
+        res.render('posts/index', { posts, title: 'Post Index' });
     },
 
 
     postNew(req, res, next) {
-        res.render('posts/new');
+        res.render('posts/new', { title: 'Post New'});
     },
 
 
@@ -39,19 +39,24 @@ module.exports = {
         req.body.post.coordinates = parsed_response;
 
         let post = await Post.create(req.body.post);
+        req.session.success = "Post created successfully!"
         res.redirect(`/posts/${post.id}`);
     },
 
 
     async postShow(req, res, next) {
-        let post = await Post.findById(req.params.id);
+        let post = await Post.findById(req.params.id).populate({
+            path: 'reviews',
+            options: { sort: { '_id': -1} }
+        });
+        console.log(post)
         res.render('posts/show', { post });
     },
 
 
     async postEdit(req, res, next) {
         let post = await Post.findById(req.params.id);
-        res.render('posts/edit', { post });
+        res.render('posts/edit', { post, title:'Edit Post' });
     },
 
 

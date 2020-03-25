@@ -10,6 +10,8 @@
     <link href="/stylesheets/post-show.css" rel="stylesheet">
 </head>
 <body>
+    <% include ../partials/flash-message  %>
+    <% include ../partials/navbar  %>
     <%- body -%>
     <script>
         var post = <%- JSON.stringify(post) %>;
