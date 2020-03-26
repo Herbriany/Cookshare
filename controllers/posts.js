@@ -47,9 +47,12 @@ module.exports = {
     async postShow(req, res, next) {
         let post = await Post.findById(req.params.id).populate({
             path: 'reviews',
-            options: { sort: { '_id': -1} }
+            options: { sort: { '_id': -1}},
+            populate: { 
+                path: 'author',
+                model: 'User'
+            }
         });
-        console.log(post)
         res.render('posts/show', { post });
     },
 
