@@ -17,4 +17,22 @@ new mapboxgl.Marker(el)
 .setPopup(new mapboxgl.Popup({ offset: 25 }) // add popups
 .setHTML('<h3>' + post.title + '</h3><p>' + post.location + '</p>'))
 .addTo(map);
-    
+
+// toggle edit review form
+
+const editButtons = document.querySelectorAll(".toggle-edit-form");
+editButtons.forEach( editButton => {
+    editButton.addEventListener("click", function() {
+        this.textContent === "Edit" ? this.textContent = "Cancel" : this.textContent = "Edit";
+        this.nextElementSibling.style.display !== "block" ? this.nextElementSibling.style = "display: block" : this.nextElementSibling.style = "display: none";
+    });
+});
+
+// clear star review button
+
+const clearButtons = document.querySelectorAll(".clear-rating"); 
+clearButtons.forEach( clearButton => {
+    clearButton.addEventListener("click", function() {
+        this.nextElementSibling.checked = true;
+    })
+}) 

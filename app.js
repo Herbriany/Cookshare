@@ -67,7 +67,7 @@ app.use(function(req, res, next) {
     "username" : "Brian"
   };
 
-  res.locals.currentUser = req.User;
+  res.locals.currentUser = req.user;
 
   res.locals.title = "Cshare";
   // set success flash message
