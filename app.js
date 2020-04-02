@@ -11,8 +11,9 @@ const passport = require('passport');
 const User = require('./models/user');
 const session = require('express-session');
 const mongoose = require('mongoose');
-const methodOverride = require('method-override')
-
+const methodOverride = require('method-override');
+// const seedPosts = require('./seeds.js')
+// seedPosts();
 
 // require routes
 const indexRouter = require('./routes/index');
