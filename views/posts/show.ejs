@@ -5,6 +5,21 @@
 <div><%= post.description %></div>
 <div>Location: <%= post.location %> </div>
 <div>
+<% for (i=0; i<5; i++) { %>
+    <% if(i < floorRating ) { %>
+        <!-- full star -->
+        <i class="fas fa-star"></i>
+    <% } else if((post.avgRating - i) > 0 && (post.avgRating - i) < 1){ %>
+        <!-- half star -->
+        <i class="fas fa-star-half-alt"></i>
+    <% } else { %>
+        <!-- empty star -->
+        <i class="far fa-star"></i>
+    <% } %>
+<% } %>
+<%= `${post.avgRating} star${post.avgRating === 1 ? '' : 's'}` %>
+</div>
+<div>
     <% post.images.forEach(function(image) { %>
         <img src="<%= image.url %>" alt="chef" width=200>
     <% }); %>

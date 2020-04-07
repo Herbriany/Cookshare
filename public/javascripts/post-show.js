@@ -1,5 +1,5 @@
 mapboxgl.accessToken = 'pk.eyJ1IjoiYnJpbGFuZCIsImEiOiJjazdtMHF3aDEwY2IwM2RwaXJ4bzE2anh4In0.bvvBWjNmdiaNkDuaQA3s9g';
-
+if (post.coordinates.length > 0) {
 var map = new mapboxgl.Map({
     container: 'map', // container id
     style: 'mapbox://styles/mapbox/streets-v11', // stylesheet location
@@ -17,6 +17,7 @@ new mapboxgl.Marker(el)
 .setPopup(new mapboxgl.Popup({ offset: 25 }) // add popups
 .setHTML('<h3>' + post.title + '</h3><p>' + post.location + '</p>'))
 .addTo(map);
+}
 
 // toggle edit review form
 

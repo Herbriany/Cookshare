@@ -64,8 +64,8 @@ passport.deserializeUser(User.deserializeUser());
 app.use(function(req, res, next) {
 
   req.user = { 
-    "_id" : "5e7c9f8810d0e57309bb6a31", 
-    "username" : "Brian"
+    "_id" : "5e80aa3cef93660579f44684", 
+    "username" : "Brian2"
   };
 
   res.locals.currentUser = req.user;
