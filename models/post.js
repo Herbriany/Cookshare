@@ -1,15 +1,28 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema; 
 const Review = require('./review');
-const mongoosePaginate = require('mongoose-paginate')
+const mongoosePaginate = require('mongoose-paginate');
 
 const PostSchema = new Schema({
-    title : String,
+    title: String,
     price: String,
     description: String,
     images: [ { url: String, public_id: String } ],
     location: String,
-    coordinates: Array,
+    geometry: {
+        type: {
+            type: String,
+            enum: ['Point'],
+            required: true
+        },
+        coordinates: {
+            type: [Number],
+            required: true
+        }
+    },
+    properties: {
+        description: String
+    },
     author: {
         type: Schema.Types.ObjectId,
         ref: 'User'

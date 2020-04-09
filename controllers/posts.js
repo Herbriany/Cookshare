@@ -1,6 +1,7 @@
 const Post = require('../models/post');
+const mapBoxToken = process.env.MAPBOX_TOKEN;
 const mbxGeocoding = require('@mapbox/mapbox-sdk/services/geocoding');
-const geocodingClient = mbxGeocoding({ accessToken: process.env.MAPBOX_TOKEN });
+const geocodingClient = mbxGeocoding({ accessToken: mapBoxToken });
 const cloudinary = require('cloudinary');
 cloudinary.config({
     cloud_name: 'dvjsq7rnx',
@@ -12,10 +13,15 @@ module.exports = {
     async postIndex(req, res, next) {
         let posts = await Post.paginate({}, {
             page: req.query.page || 1,
-            limit: 10
+            limit: 10,
+            sort: '-_id'
         });
         posts.page = Number(posts.page);
-        res.render('posts/index', { posts, title: 'Post Index' });
+        res.render('posts/index', { 
+            posts, 
+            mapBoxToken, 
+            title: 'Post Index' 
+        });
     },
 
 
@@ -39,10 +45,11 @@ module.exports = {
             limit: 2
         })
         .send()
-        let parsed_response = JSON.parse(response.rawBody).features[1].center
-        req.body.post.coordinates = parsed_response;
-
-        let post = await Post.create(req.body.post);
+        let parsed_response = JSON.parse(response.rawBody).features[0].geometry
+        req.body.post.geometry = parsed_response;
+        let post = new Post(req.body.post);
+		post.properties.description = `<strong><a href="/posts/${post._id}">${post.title}</a></strong><p>${post.location}</p><p>${post.description.substring(0, 20)}...</p>`;
+		await post.save();
         req.session.success = "Post created successfully!"
         res.redirect(`/posts/${post.id}`);
     },
@@ -58,7 +65,11 @@ module.exports = {
             }
         });
         const floorRating = post.calculateAvgRating();
-        res.render('posts/show', { post, floorRating });
+        res.render('posts/show', { 
+            post, 
+            mapBoxToken, 
+            floorRating 
+        });
     },
 
 
@@ -100,14 +111,15 @@ module.exports = {
                 limit: 2
             })
             .send()
-            let parsed_response = JSON.parse(response.rawBody).features[1].center
-            post.coordinates = parsed_response;
+            let parsed_response = JSON.parse(response.rawBody).features[1].geometry
+            post.geometry = parsed_response;
             post.location = req.body.post.location;
         }
 
         post.title = req.body.post.title;
         post.price = req.body.post.price;
         post.description = req.body.post.description;
+        post.properties.description = `<strong><a href="/posts/${post._id}">${post.title}</a></strong><p>${post.location}</p><p>${post.description.substring(0, 20)}...</p>`;
 
         post.save();
         res.redirect(`/posts/${post.id}`);
