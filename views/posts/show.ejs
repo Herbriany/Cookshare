@@ -25,6 +25,7 @@
     <% }); %>
 </div>
 <div id="map"></div>
+<% if(currentUser && post.author.equals(currentUser._id)) { %>
 <div>
     <a href="/posts/<%= post.id %>/edit">
         <button>Edit</button>
@@ -35,7 +36,8 @@
         <input type="submit" value="Delete">
     </form>
 </div>
-
+<% } %>
+<%  if (currentUser) { %>
 <h2>Write a Review</h2>
 <form action="/posts/<%= post.id %>/reviews" method="POST">
     <textarea name="review[body]" required></textarea>
@@ -56,6 +58,9 @@
     </fieldset>
     <input type="submit">
 </form>
+<% } else { %>
+    <h2><a href="/login?returnTo=true">Write a Review</a></h2>
+<% } %>
 
 <!-- display all reviews -->
 <h2>Reviews</h2>
@@ -65,7 +70,7 @@
         <h3>Rating: <%= review.rating %></h3>
         <p><%= review.body %></p>
     </div>
-    <% if(review.author.equals(currentUser._id)) { %>
+    <% if(currentUser && review.author.equals(currentUser._id)) { %>
     <div>
         <button class="toggle-edit-form">Edit</button>
         <form action="/posts/<%= post.id %>/reviews/<%= review.id %>?_method=PUT" method="POST" class="edit-review-form">

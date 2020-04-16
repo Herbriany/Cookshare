@@ -41,6 +41,7 @@ module.exports = {
         .send()
         let parsed_response = JSON.parse(response.rawBody).features[0].geometry
         req.body.post.geometry = parsed_response;
+        req.body.post.author = req.user._id;
         let post = new Post(req.body.post);
 		post.properties.description = `<strong><a href="/posts/${post._id}">${post.title}</a></strong><p>${post.location}</p><p>${post.description.substring(0, 20)}...</p>`;
 		await post.save();
@@ -67,14 +68,12 @@ module.exports = {
     },
 
 
-    async postEdit(req, res, next) {
-        let post = await Post.findById(req.params.id);
-        res.render('posts/edit', { post, title:'Edit Post' });
+    postEdit(req, res, next) {
+        res.render('posts/edit', { title:'Edit Post' });
     },
 
-
     async postUpdate(req, res, next) {
-        let post = await Post.findById(req.params.id);
+        const { post } = res.locals;
 
         if (req.body.deleteImages && req.body.deleteImages.length) {
             let deleteImages = req.body.deleteImages;
@@ -114,13 +113,13 @@ module.exports = {
         post.description = req.body.post.description;
         post.properties.description = `<strong><a href="/posts/${post._id}">${post.title}</a></strong><p>${post.location}</p><p>${post.description.substring(0, 20)}...</p>`;
 
-        post.save();
+        await post.save();
         res.redirect(`/posts/${post.id}`);
     },
 
 
     async postDestroy(req, res, next) {
-        let post = await Post.findById(req.params.id);
+        const { post } = res.locals;
         for (const image of post.images) {
             await cloudinary.v2.uploader.destroy(image.public_id);
         }
