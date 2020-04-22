@@ -5,6 +5,9 @@ const mapBoxToken = process.env.MAPBOX_TOKEN;
 const util = require('util');
 const { cloudinary } = require('../cloudinary');
 const { deleteProfileImage } = require('../middleware');
+const crypto = require('crypto');
+const sgMail = require('@sendgrid/mail');
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 module.exports = {
 
@@ -91,6 +94,92 @@ module.exports = {
     await login(user);
     req.session.success = 'Profile successfully updated';
     res.redirect('/profile');
+  },
+
+  getForgotPw (req, res, next) {
+    res.render('users/forgot');
+  },
+
+  async putForgotPw (req, res, next) {
+    const token = await crypto.randomBytes(20).toString('hex');
+    const { email } = req.body;
+    const user = await User.findOne({ email });
+    if (!user) {
+      req.session.error = 'No user with this email exists';
+      return res.redirect('/forgot-password');
+    }
+    user.resetPasswordToken = token;
+    user.resetPasswordExpires = Date.now() + 7200000;
+    await user.save();
+    const msg = {
+      to: email,
+      from: 'Cookshare admin <brian_derrig@hotmail.co.uk>',
+      subject: 'Cookshare - Forgot/reset Password',
+      text: `You are recieving this because you (or someone else) have requested the reset of the password of your account.
+      Please click on the following link, or copy and past it into your browser to complete the process:
+      http://${req.headers.host}/reset/${token}
+      If you did not request this please ignore the email and your passord will remain unchanged`.replace(/      /g, ''),
+      
+    };
+    await sgMail.send(msg);
+    req.session.success = `An email has been sent to ${email} with further instructions`;
+    console.log(msg)
+    res.redirect('/forgot-password');
+  },
+
+  async getReset (req, res, next) {
+    const { token } = req.params;
+    const user = await User.findOne({
+      resetPasswordToken: token,
+      resetPasswordExpires: { $gt: Date.now() }
+    });
+
+    if (!user) {
+      req.session.error = 'Reset password token is invalid or expired mate';
+      return res.redirect('/forgot-password');
+    }
+
+    res.render('users/reset', { token });
+  },
+
+  async putReset (req, res, next) {
+    const { token } = req.params;
+    const user = await User.findOne({
+      resetPasswordToken: token,
+      resetPasswordExpires: { $gt: Date.now() }
+    });
+
+    if (!user) {
+      req.session.error = 'Reset password token is invalid or expired';
+      return res.redirect('/forgot-password');
+    }
+
+    if (req.body.password === req.body.confirm) {
+      await user.setPassword(req.body.password);
+      user.resetPasswordToken = null;
+      user.resetPasswordExpires = null;
+      await user.save();
+      const login = util.promisify(req.login.bind(req))
+      await login(user)
+      console.log("here")
+    }
+    else {
+      console.log("not here")
+      req.session.error = 'Passwords do not match';
+      return res.redirect(`/reset/${ token }`)
+    }
+
+    const msg = {
+      to: user.email,
+      from: 'Cookshare admin <brian_derrig@hotmail.co.uk>',
+      subject: 'Cookshare - Password Changed',
+      text: `Hello ${user.username}
+      Your password has successfully been changed.
+      If you did not request this change please hit reply and notify us at once`.replace(/      /g, ''),
+    };
+    await sgMail.send(msg)
+    req.session.success = 'Password successfully updated'
+    res.redirect('/');
   }
 
 }
