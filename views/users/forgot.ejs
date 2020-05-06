@@ -1,11 +1,26 @@
 <% layout('layouts/boilerplate') -%>
-<h1>Forgot Password</h1>
-<form action="/forgot-password?_method=PUT" method="POST">
-    <div>
-        <label for="email">Email:</label>
-        <input type="text" id="email" name="email" autofocus>
+
+<div class="container">
+    <div class="spacer">
+        <div class="row m-0">
+            <div class="col-lg-8">
+                <div class="contact-box p-r-40">
+                    <h4 class="title">Forgotten Password</h4>
+                    <form data-aos="fade-left" data-aos-duration="1200" action="/forgot-password?_method=PUT" method="POST">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="form-group m-t-15">
+                                    <label for="email">Email:</label>
+                                    <input type="text" id="email" name="email" autofocus>
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <button type="submit" class="btn btn-danger-gradiant m-t-20 btn-arrow"><span> SUBMIT <i class="ti-arrow-right"></i></span></button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
-    <div>
-        <input type="submit" value="Reset Password">
-    </div>
-</form>
+</div>

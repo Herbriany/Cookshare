@@ -1,26 +1,66 @@
-<style>
-    ul {
-        list-style-type: none;
-        margin:10px;
-        padding:0;
-        }
-
-    li {
-        display:inline;
-        
-    }
-</style>
-
-<ul id="navbar">
-    <li><a href="/">Home</a></li>
-    <li><a href="/posts">Posts</a></li>
-    <% if(!currentUser) { %>
-        <li><a href="/login">Login</a></li>
-        <li><a href="/register">Register</a></li>
-    <% } else { %>
-        <li><a href="/posts/new">New Post</a></li>
-        <li><a href="/profile">Profile</a></li>
-        <li><a href="/logout">Logout</a></li>
-    Welcome <%= currentUser.username %>
-    <% } %>
-</ul>
+<div class="topbar" id="top">
+    <div class="header6">
+        <div class="container po-relative">
+            <nav class="navbar navbar-expand-lg h6-nav-bar">
+                <a href="/" class="navbar-brand"><img src="/images/logos/white-text.png" alt="cookshare" /></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#h6-info" aria-controls="h6-info" aria-expanded="false" aria-label="Toggle navigation"><span class="ti-menu"></span></button>
+                <div class="collapse navbar-collapse hover-dropdown font-14 ml-auto" id="h6-info">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item"> 
+                            <a class="nav-link" href="
+                            /<%= title === 'Cookshare - Home' ? '#section' : '' %>
+                            ">
+                                Home
+                            </a>
+                        </li>
+                        <li class="nav-item"> 
+                            <a class="nav-link" href="/posts">
+                                Posts
+                            </a>
+                        </li>
+                        <% if(!currentUser) { %>
+                        <li class="nav-item"> 
+                            <a class="nav-link" href="/login">
+                                Login
+                            </a>
+                        </li>
+                        <li class="nav-item"> 
+                            <a class="nav-link" href="/register">
+                                Register
+                            </a>
+                        </li>
+                        <% } else { %>
+                        <li class="nav-item"> 
+                            <a class="nav-link" href="/posts/new">
+                                New Post
+                            </a>
+                        </li>
+                        <li class="nav-item"> 
+                            <a class="nav-link" href="/profile">
+                                Profile
+                            </a>
+                        </li>
+                        <li class="nav-item"> 
+                            <a class="nav-link" href="/logout">
+                                Logout
+                            </a>
+                        </li>
+                        <li class="nav-item nav-link"> 
+                            Welcome <%= currentUser.username %>   
+                        </li>
+                        <% } %>
+                        <!-- Drop down nav example -->
+                        <!-- <li class="nav-item dropdown mega-dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="h1-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <strong>Pro Sections</strong> <i class="fa fa-angle-down m-l-5"></i>
+                            </a>
+                            <ul class="b-none dropdown-menu animated fadeInUp p-0">
+                                <li><a class="dropdown-item p-0" href="https://wrappixel.com/demos/ui-kit/wrapkit/wrapkit/iframe.html"><img src="../assets/images/landingpage/prod-sections-dropdown.jpg" alt="wrapkit"/></a></li>
+                            </ul>
+                        </li> -->
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </div>
+</div>

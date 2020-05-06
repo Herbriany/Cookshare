@@ -1,7 +1,31 @@
 <% layout('layouts/boilerplate') -%>
-<h1><%= title %></h1>
-<p>Welcome to <%= title %></p>
 <div id="map"></div>
+<div class="blog-home2 spacer" id="section">
+        <div class="container">
+            <!-- Row  -->
+            <div class="row justify-content-center">
+                <!-- Column -->
+                <div class="col-md-8 text-center">
+                    <h2 class="title">Recent Posts</h2>
+                    <h6 class="subtitle">Check out our latest listings</h6>
+                </div>  
+                <!-- Column -->
+            </div>
+            <div class="row m-t-40">
+            <% recentPosts.forEach(function(post) { %>
+                <div class="col-md-4">
+                    <div class="card" data-aos="flip-left" data-aos-duration="1200">
+                        <a href="/posts/<%= post._id %>"><img class="card-img-top" src="<%= post.images[0].url %>" alt="<%= post.title %>"></a>
+                        <div class="date-pos bg-info-gradiant">Oct<span>23</span></div>
+                        <h5 class="font-medium m-t-30"><a href="#" class="link"><%= post.title %></a></h5>
+                        <p class="m-t-20"><%= post.location %></p>    
+                        <a data-toggle="collapse" href="/posts/<%= post._id %>" class="linking text-themecolor m-t-10">See post <i class="ti-arrow-right"></i></a>
+                    </div>
+                </div>
+            <% }) %>
+        </div>
+    </div>
+</div>
 <script>
     mapboxgl.accessToken = "<%= mapBoxToken %>";
     var posts = {features: <%- JSON.stringify(posts) %>};

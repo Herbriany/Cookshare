@@ -22,7 +22,11 @@ const reviewsRouter = require('./routes/reviews');
 const app = express();
 
 // connect to database
-const uri = "mongodb+srv://dbBrian:Passqwer1@cookshare-eym6w.mongodb.net/test?retryWrites=true&w=majority"
+// Server link
+// const uri = "mongodb+srv://dbBrian:Passqwer1@cluster0-eym6w.mongodb.net/test?retryWrites=true&w=majority";
+// Local storage link
+// const uri = "mongodb://127.0.0.1:27017/?compressors=zlib&gssapiServiceName=mongodb";
+const uri = "mongodb://localhost:27017/cookshare";
 mongoose.connect(uri, { useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true });
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
@@ -45,6 +49,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(methodOverride('_method'));
 
+// moment
+app.locals.moment = require('moment');
 
 // configure passport and sessions
 app.use(session({
