@@ -6,16 +6,22 @@ const { cloudinary } = require('../cloudinary');
 
 module.exports = {
     async postIndex(req, res, next) {
-        let posts = await Post.paginate({}, {
+        let { dbQuery, sort, postAmount } = res.locals;
+        delete res.locals.dbQuery;
+        postAmount = Number(postAmount);
+        let posts = await Post.paginate(dbQuery, {
             page: req.query.page || 1,
-            limit: 10,
-            sort: '-_id'
+            limit: postAmount || 10,
+            sort: sort || '-_id'
         });
         posts.page = Number(posts.page);
+        if (!posts.docs.length && res.locals.query) {
+            res.locals.error = 'No results match your search'
+        }
         res.render('posts/index', { 
             posts, 
             mapBoxToken, 
-            title: 'Post Index' 
+            title: 'Posts Index' 
         });
     },
 
@@ -59,7 +65,8 @@ module.exports = {
                 model: 'User'
             }
         });
-        const floorRating = post.calculateAvgRating();
+        // const floorRating = post.calculateAvgRating();
+        const floorRating = post.avgRating;
         res.render('posts/show', { 
             post, 
             mapBoxToken, 
