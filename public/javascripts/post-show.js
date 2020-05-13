@@ -24,7 +24,7 @@ const editButtons = document.querySelectorAll(".toggle-edit-form");
 editButtons.forEach( editButton => {
     editButton.addEventListener("click", function() {
         this.textContent === "Edit" ? this.textContent = "Cancel" : this.textContent = "Edit";
-        this.nextElementSibling.style.display !== "block" ? this.nextElementSibling.style = "display: block" : this.nextElementSibling.style = "display: none";
+        this.parentElement.nextElementSibling.firstElementChild.style.display !== "block" ? this.parentElement.nextElementSibling.firstElementChild.style = "display: block" : this.parentElement.nextElementSibling.firstElementChild.style = "display: none";
     });
 });
 

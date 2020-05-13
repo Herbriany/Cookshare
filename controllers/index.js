@@ -69,11 +69,12 @@ module.exports = {
 
   getLogout(req, res, next) {
       req.logout();
+      req.session.success = 'Successfully logged out!'
       res.redirect('/');
   },
 
   async getProfile (req, res, next) {
-    const posts = await Post.find().where('author').equals(req.user._id).limit(10).exec();
+    const posts = await Post.find().where('author').equals(req.user._id).limit(3).exec();
     res.render('profile', { posts });
   },
 

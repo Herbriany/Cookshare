@@ -1,58 +1,91 @@
-<div style="margin: 20px 0">
-    <% if (posts.page - 1) { %>
-        <a href="<%= paginateUrl %><%= posts.page - 1 %>">Prev</a>
-    <% } %>
-
-    <% if (posts.pages > 1 && posts.docs.length) { %>
-
-        <% if (posts.pages < 11) { %>
-            <% for (let i=1; i <= posts.pages; i++) { %>
-                <a href="<%= paginateUrl %><%= i %>"
-                    <%= i === posts.page ? 'style=color:#000' : '' %>
-                ><%= i %></a>
-            <% } %>
-        <% } %>
-
-        <% if (posts.pages >= 11) { %>
-            
-            <% if (posts.page < 6) { %>
-                <% for(let i=1; i < 10; i++) { %>
-                    <a href="<%= paginateUrl %><%= i %>"
-                        <%= i === posts.page ? 'style=color:#000' : '' %>
-                    ><%= i %></a>
+<div class="row">
+    <div class="col-md-6 m-t-30">
+        <nav aria-label="...">
+            <ul class="pagination pagination-sm">
+                <% if (posts.page - 1) { %>
+                    <li class="page-item disabled">
+                        <a class="page-link" href="<%= paginateUrl %><%= posts.page - 1 %>" tabindex="-1">Previous</a>
+                    </li>
                 <% } %>
-                ...
-                <a href="<%= paginateUrl %><%= posts.pages %>"><%= posts.pages %></a>
-            <% } %>
+                <% if (posts.pages > 1 && posts.docs.length) { %>
 
-            <% if ((posts.page > 6) && (posts.page < (posts.pages - 6))) { %>
-                <a href="<%= paginateUrl %>1">1</a>
-                ...
-                <% for(let i=(posts.page-4); i < (posts.page + 5); i++) { %>
-                    <a href="<%= paginateUrl %><%= i %>"
-                        <%= i === posts.page ? 'style=color:#000' : '' %>
-                    ><%= i %></a>
+                    <% if (posts.pages < 11) { %>
+                        <% for (let i=1; i <= posts.pages; i++) { %>
+                        <li class="page-item">
+                            <a class="page-link" href="<%= paginateUrl %><%= i %>"
+                                <%= i === posts.page ? 'style=color:#000' : '' %>
+                            ><%= i %></a>
+                        </li>
+                        <% } %>
+                    <% } %>
+        
+                    <% if (posts.pages >= 11) { %>
+                        
+                        <% if (posts.page < 6) { %>
+                            <% for(let i=1; i < 10; i++) { %>
+                            <li class="page-item">
+                                <a class="page-link" href="<%= paginateUrl %><%= i %>"
+                                    <%= i === posts.page ? 'style=color:#000' : '' %>
+                                ><%= i %></a>
+                            </li>
+                            <% } %>
+                            <li class="page-item">
+                                <div class="page-link">...</div>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="<%= paginateUrl %><%= posts.pages %>"><%= posts.pages %></a>
+                            </li>
+                        <% } %>
+        
+                        <% if ((posts.page > 6) && (posts.page < (posts.pages - 6))) { %>
+                            <li class="page-item">
+                                <a class="page-link" href="<%= paginateUrl %>1">1</a>
+                            </li>
+                            <li class="page-item">
+                                <div class="page-link">...</div>
+                            </li>
+                            <% for(let i=(posts.page-4); i < (posts.page + 5); i++) { %>
+                            <li class="page-item">
+                                <a class="page-link" href="<%= paginateUrl %><%= i %>"
+                                    <%= i === posts.page ? 'style=color:#000' : '' %>
+                                ><%= i %></a>
+                            </li>
+                            <% } %>
+                            <li class="page-item">
+                                <div class="page-link">...</div>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="<%= paginateUrl %><%= posts.pages %>"><%= posts.pages %></a>
+                            </li>
+                        <% } %>
+        
+                        <% if (posts.page > (posts.pages - 6)) { %>
+                            <li class="page-item">
+                                <a class="page-link" href="<%= paginateUrl %>1">1</a>
+                            </li>
+                            <li class="page-item">
+                                <div class="page-link">...</div>
+                            </li>
+                            <% for(let i= (posts.pages - 6); i <= posts.pages; i++) { %>
+                            <li class="page-item">
+                                <a class="page-link" href="<%= paginateUrl %><%= i %>"
+                                    <%= i === posts.page ? 'style=color:#000' : '' %>
+                                ><%= i %></a>
+                            </li>
+                            <% } %>
+                        <% } %>
+        
+                    <% } %>
+        
                 <% } %>
-                ...
-                <a href="<%= paginateUrl %><%= posts.pages %>"><%= posts.pages %></a>
-            <% } %>
 
-            <% if (posts.page > (posts.pages - 6)) { %>
-                <a href="<%= paginateUrl %>1">1</a>
-                ...
-                <% for(let i= (posts.pages - 6); i <= posts.pages; i++) { %>
-                    <a href="<%= paginateUrl %><%= i %>"
-                        <%= i === posts.page ? 'style=color:#000' : '' %>
-                    ><%= i %></a>
+                <% if ((posts.page + 1) <= posts.pages) { %>
+                <li class="page-item">
+                    <a class="page-link" href="<%= paginateUrl %><%= posts.page + 1 %>">Next</a>
+                </li>
                 <% } %>
-            <% } %>
-
-        <% } %>
-
-    <% } %>
-
-    <% if ((posts.page + 1) <= posts.pages) { %>
-        <a href="<%= paginateUrl %><%= posts.page + 1 %>">Next</a>
-    <% } %>
-    <div>Showing <%= posts.page === posts.pages ? (posts.total - (posts.limit * (posts.pages - 1))) : posts.limit %> result<%= posts.total === 1 ? '' : 's' %> of <%= posts.total %></div>
+            </ul>
+        </nav>
+        <h6 class="card-subtitle" id="results-text">Showing <%= posts.page === posts.pages ? (posts.total - (posts.limit * (posts.pages - 1))) : posts.limit %> result<%= posts.total === 1 ? '' : 's' %> of <%= posts.total %></h6>
+    </div>
 </div>

@@ -1,44 +1,110 @@
 <% layout('layouts/boilerplate') -%>
 
-<h1><img src="<%= currentUser.image.secure_url %>" alt="<%= currentUser.username %>'s profile image" class="profile-image"/><%= currentUser.username %>'s Profile</h1>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-4 m-b-30"></div>
+        <div class="col-lg-4 text-center m-b-30">
+            <h1 class="title font-bold"><%= currentUser.username %>'s Profile</h1>
+            <img src="<%= currentUser.image.secure_url %>" alt="<%= currentUser.username %>'s profile image" class="img-circle" width="290">
+            <p class="m-t-15 m-b-0"></p>
+        </div>
+        <div class="col-lg-4"></div>
+    </div>
+</div>
 
-<p>Recent posts: </p>
+<div class="blog-home2" id="section">
+    <div class="container">
+        <!-- Row  -->
+        <div class="row justify-content-center">
+            <!-- Column -->
+            <div class="col-md-8 text-center">
+                <h2 class="title">Recent Posts</h2>
+                <% if (posts.length === 0) { %>
+                    <h6 class="subtitle">You haven't posted anything yet! <a href="/posts/new">Start posting</a></h6>
+                <% } else { %>
+                    <h6 class="subtitle">Your three most recent posts:</h6>
+                <% } %>
+            </div>  
+            <!-- Column -->
+        </div>
+        <% if (posts.length > 0) { %>
+            <div class="row m-t-40"> 
+            <% posts.forEach(function(post) { %>     
+                <div class="col-md-4">
+                    <div class="card" data-aos="flip-left" data-aos-duration="1200">
+                        <% if (post.images.length) { %>
+                            <a href="/posts/<%= post._id %>"><img class="card-img-top" src="<%= post.images[0].url %>" alt="<%= post.title %>"></a>
+                        <% } %> 
+                        <div class="date-pos bg-info-gradiant">Oct<span>23</span></div>
+                        <h5 class="font-medium m-t-30"><a href="#" class="link"><%= post.title %></a></h5>
+                        <p class="m-t-20"><%= post.location %></p>    
+                        <a data-toggle="collapse" href="/posts/<%= post._id %>" class="linking text-themecolor m-t-10">See post <i class="ti-arrow-right"></i></a>
+                    </div>
+                </div>
+            <% }) %>
+            </div>
+        <% } %>
+    </div>
+</div>
 
-<% posts.forEach( function(post) { %>
-    <div>
-        <a href="/posts/<%= post.id %>"><%= post.title %></a>
+<div class="container">
+    <div class="spacer">
+        <div class="row m-0">
+            <div class="col-lg-12">
+                <div class="contact-box p-r-40">
+                    <h4 class="title">Update Info</h4>
+                    <form data-aos="fade-left" data-aos-duration="1200" action="/profile?_method=PUT" method="POST" enctype="multipart/form-data">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group m-t-15">
+                                    <label for="username">Username:</label>
+                                    <input type="text" id="username" name="username" placeholder="username" value="<%= currentUser.username %>" class="form-control" autofocus required>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group m-t-15">
+                                    <label for="current-password">Current Password:</label>
+                                    <input type="password" id="current-password" name="currentPassword" placeholder="current password" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group m-t-15">
+                                    <label for="new-password">New Password:</label>
+                                    <input type="password" id="new-password" name="newPassword" placeholder="new password" class="form-control"> 
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group m-t-15">
+                                    <label for="password-confirmation">Password Confirmation:</label>
+                                    <input type="password" id="password-confirmation" name="passwordConfirmation" placeholder="password confirmation" class="form-control"> 
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group m-t-15">
+                                    <label for="email">Email:</label>
+                                    <input type="email" id="email" name="email" placeholder="email" value="<%= currentUser.email %>" class="form-control" > 
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <label for="image">Image:</label>
+                                <small>(will delete old image)</small>
+                                <input type="file" id="image" name="image">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <button type="submit" class="btn btn-danger-gradiant m-t-20 btn-arrow" id="update-profile"><span> SUBMIT <i class="ti-arrow-right"></i></span></button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
-<% }) %>
-
-<p>Update Info:</p>
-<form action="/profile?_method=PUT" method="POST" enctype="multipart/form-data">
-    <div>
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" placeholder="username" value="<%= currentUser.username %>"  autofocus required>
-    </div>
-    <div>
-        <label for="current-password">Current Password:</label>
-        <input type="password" id="current-password" name="currentPassword" placeholder="current password" required>
-    </div>
-    <div>
-        <label for="new-password">New Password:</label>
-        <input type="password" id="new-password" name="newPassword" placeholder="new password"> 
-    </div>
-    <div>
-        <label for="password-confirmation">Password Confirmation:</label>
-        <input type="password" id="password-confirmation" name="passwordConfirmation" placeholder="password confirmation"> 
-    </div>
-    <div id="validation-message"></div>
-    <div>
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" placeholder="email" value="<%= currentUser.email %>"> 
-    </div>
-    <div>
-        <label for="image">Image:</label>
-        <small>(will delete old image)</small>
-        <input type="file" id="image" name="image">
-    </div>
-    <input type="submit" id="update-profile">
-</form>
+</div>
 
 <script src="/javascripts/profile.js"></script>

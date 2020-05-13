@@ -1,6 +1,6 @@
 #map { 
     height: 300px; 
-    width: 500px; 
+    width: auto; 
 }
 .marker {
     background-image: url('/images/mapbox-icon.png');

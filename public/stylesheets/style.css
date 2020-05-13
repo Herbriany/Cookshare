@@ -24,7 +24,11 @@
   color:red;
 }
 
-.profile-image {
-  width: 100px;
-  border-radius: 50%;
+.imageDeleteCheckbox {
+  width:20px;
+  height:20px;
+}
+
+#results-text {
+  margin-bottom: 0;
 }
