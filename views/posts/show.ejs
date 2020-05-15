@@ -56,6 +56,13 @@
                 <% }); %>
             </div>
             <% } %>
+            <div class="row m-t-15 m-b-15">
+                <div class="col-md-1">
+                    <a href="/checkout">
+                        <button type="submit" class="btn btn-success waves-effect waves-light m-r-10">Buy</button>
+                    </a>
+                </div>
+            </div>
             <% if(currentUser && post.author.equals(currentUser._id)) { %>
             <div class="row m-t-15">
                 <div class="col-md-1">

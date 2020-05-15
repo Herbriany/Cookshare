@@ -15,18 +15,19 @@
     <script src="https://kit.fontawesome.com/796de8dc04.js" crossorigin="anonymous"></script>
     <link href="https://api.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.css" rel="stylesheet"/>
     <script src="https://api.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.js"></script>
+    <script src="https://js.stripe.com/v3/"></script>
 </head>
 <body>
     <div id="main-wrapper">
-        <% include ../partials/navbar  %>
+        <%- include('../partials/navbar') %>
         <div class="page-wrapper">
             <div class="container-fluid">
-                <% include ../partials/header-background %>
-                <% include ../partials/flash-message  %>
+                <%- include('../partials/header-background') %>
+                <%- include('../partials/flash-message') %>
                 <%- body -%>
             </div>
         </div>
-        <% include ../partials/footer %>
+        <%- include('../partials/footer') %>
     </div>
     <script>
         mapboxgl.accessToken = "<%= mapBoxToken %>";

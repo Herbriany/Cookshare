@@ -26,6 +26,7 @@ const middleware = {
     },
     isLoggedIn: (req, res, next) => {
         if (req.isAuthenticated()) return next();
+        if (req['headers']['content-type']) return res.send({error: 'Login required'})
         req.session.error = 'You need to be logged in to do that!'
         req.session.redirectTo = req.originalUrl;
         res.redirect('/login')

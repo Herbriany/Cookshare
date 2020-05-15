@@ -15,7 +15,10 @@ const {
   getForgotPw,
   putForgotPw,
   getReset,
-  putReset
+  putReset,
+  getCheckout,
+  postPay,
+  getPaid
 } = require('../controllers');
 const {  
     asyncErrorHandler,
@@ -65,5 +68,20 @@ router.get('/reset/:token', asyncErrorHandler(getReset));
 
 /* PUT /reset-pw/:token */
 router.put('/reset/:token', asyncErrorHandler(putReset));
+
+/* GET Checkout */ 
+router.get('/checkout', 
+// isLoggedIn, 
+getCheckout);
+
+/* POST Pay */
+router.post("/pay", 
+// isLoggedIn,
+ postPay);
+
+/* Get Paid */  
+router.get('/paid', 
+// isLoggedIn,
+getPaid);
 
 module.exports = router;
