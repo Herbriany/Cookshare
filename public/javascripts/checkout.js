@@ -45,10 +45,12 @@ form.addEventListener('submit', function(ev) {
       } 
       else {
         orderData.paymentMethodId = result.paymentMethod.id;
+        
         return fetch("/pay", {
           method: "POST",
           headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            "post": post._id
           },
           body: JSON.stringify(orderData)
         });
@@ -64,8 +66,7 @@ form.addEventListener('submit', function(ev) {
       // redirect to product page with success flash message
       console.log('Payment completed')
       changeLoadingState(false);
-      amount = 20
-      window.location.href = '/paid?amount='+amount
+      window.location.href = '/paid?post='+post._id;
     }
   });
 });

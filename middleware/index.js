@@ -5,6 +5,7 @@ const mapBoxToken = process.env.MAPBOX_TOKEN;
 const mbxGeocoding = require('@mapbox/mapbox-sdk/services/geocoding');
 const geocodingClient = mbxGeocoding({ accessToken: mapBoxToken });
 const { cloudinary } = require ('../cloudinary');
+const currencies = require('../currencies');
 
 function escapeRegExp(string) {
     return string.replace(/[.*+\-?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
@@ -16,6 +17,7 @@ const middleware = {
             Promise.resolve(fn(req, res, next))
                    .catch(next);
     },
+
     isReviewAuthor: async (req, res, next) => {
         let review = await Review.findById(req.params.review_id);
         if(review.author.equals(req.user._id)) {
@@ -24,6 +26,7 @@ const middleware = {
         req.session.error = 'Get Lost!';
         return res.redirect('/');
     },
+
     isLoggedIn: (req, res, next) => {
         if (req.isAuthenticated()) return next();
         if (req['headers']['content-type']) return res.send({error: 'Login required'})
@@ -31,6 +34,7 @@ const middleware = {
         req.session.redirectTo = req.originalUrl;
         res.redirect('/login')
     },
+
     isPostAuthor: async (req, res, next) => {
         let post = await Post.findById(req.params.id);
         if(post.author.equals(req.user._id)) {
@@ -40,6 +44,7 @@ const middleware = {
         req.session.error = 'Get Lost!';
         res.redirect('back');
     },
+
     isValidPassword: async (req, res, next) => {
         const { user } = await User.authenticate()(req.user.username, req.body.currentPassword);
         if (user) {
@@ -52,6 +57,7 @@ const middleware = {
             return res.redirect('/profile');
         }
     },
+
     changePassword: async (req, res, next) => {
         const {
             newPassword,
@@ -78,9 +84,23 @@ const middleware = {
             next();
         }
     },
+
     deleteProfileImage : async req => {
         if (req.file) await cloudinary.v2.uploader.destroy(req.file.public_id);
     },
+
+    checkStep : async(req, res, next) => {
+        if (currencies[req.user.currency]['decimal_digits'] === 0) {
+            var step = 1;
+        }
+        else { 
+            var stepNumber = ('0.' + (currencies[req.user.currency]['decimal_digits'] -1) * '0') + '1'
+            var step = parseFloat(stepNumber)
+        } 
+        res.locals.step = step;
+        next();
+    },
+
     async searchAndFilterPosts(req, res, next) {
         const queryKeys = Object.keys(req.query);
 

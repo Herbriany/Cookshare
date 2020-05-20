@@ -16,8 +16,8 @@
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group m-t-15">
-                                    <label for="price">Price:</label>
-                                    <input type="number" name="post[price]" placeholder="Price" step=".01" id="price" value="<%= post.price %>" class="form-control">
+                                    <label for="price">Price (<%= currentUser.currency %>):<small><a href="/profile">Change currency</a></small></label>
+                                    <input type="number" name="post[price]" placeholder="Price" step="<%= step %>" id="price" value="<%= post.price %>" class="form-control">
                                 </div>
                             </div>
                         </div>

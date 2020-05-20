@@ -1,42 +1,174 @@
 <% layout('layouts/boilerplate') -%>
 
-<div class="container">
-    <div class="spacer">
-        <div class="row m-0">
-            <div class="col-lg-12">
-                <div class="contact-box p-r-40">
-                    <h4 class="title">Register</h4>
-                    <form data-aos="fade-left" data-aos-duration="1200" action="/register" method="POST" enctype="multipart/form-data">
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <div class="form-group m-t-15">
-                                    <label for="username">Username:</label>
-                                    <input type="text" id="username" name="username" placeholder="username" value="<%= username %>" class="form-control" required>
+    <div class="container">
+        <div class="spacer">
+            <div class="row m-0">
+                <div class="col-lg-12">
+                    <div class="contact-box p-r-40">
+                        <h4 class="title">Register</h4>
+                        <form data-aos="fade-left" data-aos-duration="1200" action="/register" method="POST" enctype="multipart/form-data">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group m-t-15">
+                                        <label for="username">Username:</label>
+                                        <input type="text" id="username" name="username" placeholder="username" value="<%= username %>" class="form-control" required>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group m-t-15">
+                                        <label for="password">Password:</label>
+                                        <input type="password" id="password" name="password" placeholder="password" class="form-control" required>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group m-t-15">
+                                        <label for="email">Email:</label>
+                                        <input type="email" id="email" name="email" placeholder="email" value="<%= email %>" class="form-control" required>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group m-t-15">
+                                        <fieldset>
+                                            <label for="culture-selector-currency"> Currency</label>
+                                            <select id="culture-selector-currency" name="currency" class="form-control">
+                                                <optgroup label="Popular currencies">
+                                                    <option value="EUR">‭EUR - €</option>
+                                                    <option value="GBP">‭GBP - £</option>
+                                                    <option value="USD">‭USD - $</option>
+                                                </optgroup>
+                                                <optgroup label="Other currencies">
+                                                        <option value="AED">‭AED - AED</option>
+                                                        <option value="AFN">‭AFN - AFN</option>
+                                                        <option value="ALL">‭ALL - Lek</option>
+                                                        <option value="AMD">‭AMD - դր.</option>
+                                                        <option value="ARS">‭ARS - $</option>
+                                                        <option value="AUD">‭AUD - $</option>
+                                                        <option value="AWG">‭AWG - Afl.</option>
+                                                        <option value="AZN">‭AZN - ₼</option>
+                                                        <option value="BAM">‭BAM - КМ</option>
+                                                        <option value="BDT">‭BDT - BDT</option>
+                                                        <option value="BGN">‭BGN - лв.</option>
+                                                        <option value="BHD">‭BHD - د.ب.‏</option>
+                                                        <option value="BIF">‭BIF - FBu</option>
+                                                        <option value="BMD">‭BMD - $</option>
+                                                        <option value="BND">‭BND - $</option>
+                                                        <option value="BOB">‭BOB - Bs</option>
+                                                        <option value="BRL">‭BRL - R$</option>
+                                                        <option value="BWP">‭BWP - P</option>
+                                                        <option value="BYN">‭BYN - Br</option>
+                                                        <option value="BZD">‭BZD - BZ$</option>
+                                                        <option value="CDF">‭CDF - FC</option>
+                                                        <option value="CHF">‭CHF - CHF</option>
+                                                        <option value="CLP">‭CLP - $</option>
+                                                        <option value="CNY">‭CNY - ¥</option>
+                                                        <option value="COP">‭COP - $</option>
+                                                        <option value="CRC">‭CRC - ₡</option>
+                                                        <option value="CVE">‭CVE - $</option>
+                                                        <option value="CZK">‭CZK - Kč</option>
+                                                        <option value="DJF">‭DJF - Fdj</option>
+                                                        <option value="DKK">‭DKK - kr.</option>
+                                                        <option value="DOP">‭DOP - RD$</option>
+                                                        <option value="DZD">‭DZD - د.ج.‏</option>
+                                                        <option value="EGP">‭EGP - ج.م.‏</option>
+                                                        <option value="ERN">‭ERN - Nfk</option>
+                                                        <option value="ETB">‭ETB - Br</option>
+                                                        <option value="GEL">‭GEL - ₾</option>
+                                                        <option value="GHS">‭GHS - GH¢</option>
+                                                        <option value="GNF">‭GNF - FG</option>
+                                                        <option value="GTQ">‭GTQ - Q</option>
+                                                        <option value="HKD">‭HKD - HK$</option>
+                                                        <option value="HNL">‭HNL - L.</option>
+                                                        <option value="HRK">‭HRK - kn</option>
+                                                        <option value="HUF">‭HUF - Ft</option>
+                                                        <option value="IDR">‭IDR - Rp</option>
+                                                        <option value="ILS">‭ILS - ₪</option>
+                                                        <option value="INR">‭INR - ₹</option>
+                                                        <option value="IQD">‭IQD - د.ع.‏</option>
+                                                        <option value="IRR">‭IRR - ريال</option>
+                                                        <option value="ISK">‭ISK - kr.</option>
+                                                        <option value="JMD">‭JMD - J$</option>
+                                                        <option value="JOD">‭JOD - د.ا.‏</option>
+                                                        <option value="JPY">‭JPY - ¥</option>
+                                                        <option value="KES">‭KES - S</option>
+                                                        <option value="KGS">‭KGS - сом</option>
+                                                        <option value="KHR">‭KHR - KHR</option>
+                                                        <option value="KMF">‭KMF - CF</option>
+                                                        <option value="KRW">‭KRW - ₩</option>
+                                                        <option value="KWD">‭KWD - د.ك.‏</option>
+                                                        <option value="KZT">‭KZT - Т</option>
+                                                        <option value="LBP">‭LBP - ل.ل.‏</option>
+                                                        <option value="LKR">‭LKR - Rp</option>
+                                                        <option value="LYD">‭LYD - د.ل.‏</option>
+                                                        <option value="MAD">‭MAD - د.م.‏</option>
+                                                        <option value="MDL">‭MDL - lei</option>
+                                                        <option value="MGA">‭MGA - Ar</option>
+                                                        <option value="MKD">‭MKD - ден.</option>
+                                                        <option value="MMK">‭MMK - K</option>
+                                                        <option value="MOP">‭MOP - MOP$</option>
+                                                        <option value="MUR">‭MUR - Rs</option>
+                                                        <option value="MXN">‭MXN - $</option>
+                                                        <option value="MYR">‭MYR - RM</option>
+                                                        <option value="MZN">‭MZN - MT</option>
+                                                        <option value="NAD">‭NAD - $</option>
+                                                        <option value="NGN">‭NGN - ₦</option>
+                                                        <option value="NIO">‭NIO - C$</option>
+                                                        <option value="NOK">‭NOK - kr</option>
+                                                        <option value="NPR">‭NPR - रु</option>
+                                                        <option value="NZD">‭NZD - $</option>
+                                                        <option value="OMR">‭OMR - ر.ع.‏</option>
+                                                        <option value="PAB">‭PAB - B/.</option>
+                                                        <option value="PEN">‭PEN - S/.</option>
+                                                        <option value="PHP">‭PHP - P</option>
+                                                        <option value="PKR">‭PKR - Rs</option>
+                                                        <option value="PLN">‭PLN - zł</option>
+                                                        <option value="PYG">‭PYG - Gs</option>
+                                                        <option value="QAR">‭QAR - ر.ق.‏</option>
+                                                        <option value="RON">‭RON - lei</option>
+                                                        <option value="RSD">‭RSD - Дин.</option>
+                                                        <option value="RUB">‭RUB - ₽</option>
+                                                        <option value="RWF">‭RWF - RWF</option>
+                                                        <option value="SAR">‭SAR - SAR</option>
+                                                        <option value="SDG">‭SDG - ج.س.‏</option>
+                                                        <option value="SEK">‭SEK - SEK</option>
+                                                        <option value="SGD">‭SGD - $</option>
+                                                        <option value="SOS">‭SOS - S</option>
+                                                        <option value="SYP">‭SYP - ل.س.‏</option>
+                                                        <option value="THB">‭THB - ฿</option>
+                                                        <option value="TND">‭TND - د.ت.‏</option>
+                                                        <option value="TOP">‭TOP - T$</option>
+                                                        <option value="TRY">‭TRY - TL</option>
+                                                        <option value="TTD">‭TTD - TT$</option>
+                                                        <option value="TWD">‭TWD - NT$</option>
+                                                        <option value="TZS">‭TZS - TSh</option>
+                                                        <option value="UAH">‭UAH - грн.</option>
+                                                        <option value="UGX">‭UGX - USh</option>
+                                                        <option value="UYU">‭UYU - $U</option>
+                                                        <option value="UZS">‭UZS - сўм</option>
+                                                        <option value="VND">‭VND - ₫</option>
+                                                        <option value="XAF">‭XAF - F</option>
+                                                        <option value="XOF">‭XOF - F</option>
+                                                        <option value="YER">‭YER - ر.ي.‏</option>
+                                                        <option value="ZAR">‭ZAR - R</option>
+                                                </optgroup>
+                                            </select>
+                                        </fieldset>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <label for="image">Profile image:</label>
+                                    <input type="file" id="image" name="image">
+                                </div>
+                                <div class="col-lg-12">
+                                    <button type="submit" class="btn btn-danger-gradiant m-t-20 btn-arrow">
+                                        <span> SUBMIT
+                                            <i class="ti-arrow-right"></i>
+                                        </span>
+                                    </button>
                                 </div>
                             </div>
-                            <div class="col-lg-6">
-                                <div class="form-group m-t-15">
-                                    <label for="password">Password:</label>
-                                    <input type="password" id="password" name="password" placeholder="password" class="form-control" required>
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="form-group m-t-15">
-                                    <label for="email">Email:</label>
-                                    <input type="email" id="email" name="email" placeholder="email"  value="<%= email %>" class="form-control" required>
-                                </div>
-                            </div>
-                            <div class="col-lg-12">
-                                <label for="image">Profile image:</label>
-                                <input type="file" id="image" name="image">
-                            </div>
-                            <div class="col-lg-12">
-                                <button type="submit" class="btn btn-danger-gradiant m-t-20 btn-arrow"><span> SUBMIT <i class="ti-arrow-right"></i></span></button>
-                            </div>
-                        </div>
-                    </form>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>

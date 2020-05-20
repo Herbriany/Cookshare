@@ -11,19 +11,19 @@
                             <div class="col-lg-4">
                                 <div class="form-group m-t-15">
                                     <label for="title">Food name:</label>
-                                    <input type="text" name="post[title]" placeholder="Title" id="title" class="form-control">
+                                    <input type="text" name="post[title]" placeholder="Title" id="title" class="form-control" required>
                                 </div>
                             </div>
                             <div class="col-lg-4">
                                 <div class="form-group m-t-15">
-                                    <label for="price">Price:</label>
-                                    <input type="number" name="post[price]" step=".01" placeholder="Price" id="price" class="form-control">
+                                    <label for="price">Price:<small><a href="/profile">Change currency</a></small></label>
+                                    <input type="number" name="post[price]" step="<%= step %>" placeholder="Price (<%= currentUser.currency %>)" id="price" class="form-control" required>
                                 </div>
                             </div>
                             <div class="col-lg-4">
                                 <div class="form-group m-t-15">
                                     <label for="location">Location:</label>
-                                    <input type="text" name="post[location]" placeholder="Location" id="location" class="form-control">
+                                    <input type="text" name="post[location]" placeholder="Location" id="location" class="form-control" required>
                                 </div>
                             </div>
                             <div class="col-lg-4">

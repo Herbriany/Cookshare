@@ -12,6 +12,7 @@ async function seedPosts() {
 		const postData = {
 			title,
 			description,
+			currency: 'USD',
 			location: `${cities[random1000].city}, ${cities[random1000].state}`,
 			geometry: {
 				type: 'Point',

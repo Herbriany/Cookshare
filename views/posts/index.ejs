@@ -32,38 +32,38 @@
         <% } else { %>
             <div class="m-t-15">
                 <% include ../partials/paginate %>
-                <% posts.docs.forEach(function(post) { %>
+                <% for (let i=0; i < posts.docs.length; i++) { %>
                     <div class="row mt-15">
                         <div class="col-md-12">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <h2 class="title"><%= post.title %></h2>
+                                    <h2 class="title"><%= posts.docs[i].title %></h2>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-6">
-                                    <h4 class="subtitle">Price: <%= post.price %></h4>
+                                    <h4 class="subtitle">Price: <%= symbol %><%= newPrices[i] %></h4>
                                 </div>
                                 <div class="col-md-6">
-                                    <h4 class="subtitle">Rating: <%= post.avgRating %></h4>
+                                    <h4 class="subtitle">Rating: <%= posts.docs[i].avgRating %></h4>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-6">
-                                    <p class="subtitle"><%= post.description %></p>
+                                    <p class="subtitle"><%= posts.docs[i].description %></p>
                                 </div>
                                 <div class="col-md-6">
-                                    <h4 class="subtitle">Location: <%= post.location %></h4>
+                                    <h4 class="subtitle">Location: <%= posts.docs[i].location %></h4>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-4">
-                                    <a class="title" href="/posts/<%= post.id %>">View more</a>
+                                    <a class="title" href="/posts/<%= posts.docs[i].id %>">View more</a>
                                 </div>
                             </div>
                         </div>
                     </div>
-                <% }) %>
+                <% } %>
             </div>
         <% } %>
         <% include ../partials/paginate  %>

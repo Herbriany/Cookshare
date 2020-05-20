@@ -6,7 +6,8 @@ const upload = multer({ storage })
 const { asyncErrorHandler, 
         isLoggedIn, 
         isPostAuthor, 
-        searchAndFilterPosts 
+        searchAndFilterPosts,
+        checkStep
     } = require('../middleware');
 const { postIndex, 
         postNew, 
@@ -21,7 +22,7 @@ const { postIndex,
 router.get('/', asyncErrorHandler(searchAndFilterPosts), asyncErrorHandler(postIndex));
 
 /* GET posts new /posts/new */
-router.get('/new', isLoggedIn, postNew);
+router.get('/new', isLoggedIn, checkStep, postNew);
 
 /* POST posts create /posts */
 router.post('/', isLoggedIn, upload.array('images', 4), asyncErrorHandler(postCreate));
@@ -30,7 +31,7 @@ router.post('/', isLoggedIn, upload.array('images', 4), asyncErrorHandler(postCr
 router.get('/:id', asyncErrorHandler(postShow));
 
 /* GET posts edit /posts/:id/edit */
-router.get('/:id/edit', isLoggedIn, asyncErrorHandler(isPostAuthor), postEdit);
+router.get('/:id/edit', isLoggedIn, asyncErrorHandler(isPostAuthor), checkStep, postEdit);
 
 /* PUT posts update /posts/:id */
 router.put('/:id', isLoggedIn, asyncErrorHandler(isPostAuthor), upload.array('images', 4), asyncErrorHandler(postUpdate));

@@ -87,6 +87,134 @@
                                     <input type="email" id="email" name="email" placeholder="email" value="<%= currentUser.email %>" class="form-control" > 
                                 </div>
                             </div>
+                            <div class="col-lg-6">
+                                <div class="form-group m-t-15">
+                                    <fieldset>
+                                        <label for="culture-selector-currency"> Currency</label>
+                                        <select id="culture-selector-currency" name="currency" class="form-control">
+                                            <optgroup label="Popular currencies">
+                                                <option value="EUR" <%= currentUser.currency === 'EUR' ? 'selected="true"' : '' %>>‭EUR - €</option>
+                                                <option value="GBP" <%= currentUser.currency === 'GBP' ? 'selected="true"' : '' %>>‭GBP - £</option>
+                                                <option value="USD" <%= currentUser.currency === 'USD' ? 'selected="true"' : '' %>>‭USD - $</option>
+                                            </optgroup>
+                                            <optgroup label="Other currencies">
+                                                <option value="AED" <%= currentUser.currency === 'AED' ? 'selected="true"' : '' %>>‭AED - AED</option>
+                                                <option value="AFN" <%= currentUser.currency === 'AFN' ? 'selected="true"' : '' %>>‭AFN - AFN</option>
+                                                <option value="ALL" <%= currentUser.currency === 'ALL' ? 'selected="true"' : '' %>>‭ALL - Lek</option>
+                                                <option value="AMD" <%= currentUser.currency === 'AMD' ? 'selected="true"' : '' %>>‭AMD - դր.</option>
+                                                <option value="ARS" <%= currentUser.currency === 'ARS' ? 'selected="true"' : '' %>>‭ARS - $</option>
+                                                <option value="AUD" <%= currentUser.currency === 'AUD' ? 'selected="true"' : '' %>>‭AUD - $</option>
+                                                <option value="AWG" <%= currentUser.currency === 'AWG' ? 'selected="true"' : '' %>>‭AWG - Afl.</option>
+                                                <option value="AZN" <%= currentUser.currency === 'AZN' ? 'selected="true"' : '' %>>‭AZN - ₼</option>
+                                                <option value="BAM" <%= currentUser.currency === 'BAM' ? 'selected="true"' : '' %>>‭BAM - КМ</option>
+                                                <option value="BDT" <%= currentUser.currency === 'BDT' ? 'selected="true"' : '' %>>‭BDT - BDT</option>
+                                                <option value="BGN" <%= currentUser.currency === 'BGN' ? 'selected="true"' : '' %>>‭BGN - лв.</option>
+                                                <option value="BHD" <%= currentUser.currency === 'BHD' ? 'selected="true"' : '' %>>‭BHD - د.ب.‏</option>
+                                                <option value="BIF" <%= currentUser.currency === 'BIF' ? 'selected="true"' : '' %>>‭BIF - FBu</option>
+                                                <option value="BMD" <%= currentUser.currency === 'BMD' ? 'selected="true"' : '' %>>‭BMD - $</option>
+                                                <option value="BND" <%= currentUser.currency === 'BND' ? 'selected="true"' : '' %>>‭BND - $</option>
+                                                <option value="BOB" <%= currentUser.currency === 'BOB' ? 'selected="true"' : '' %>>‭BOB - Bs</option>
+                                                <option value="BRL" <%= currentUser.currency === 'BRL' ? 'selected="true"' : '' %>>‭BRL - R$</option>
+                                                <option value="BWP" <%= currentUser.currency === 'BWP' ? 'selected="true"' : '' %>>‭BWP - P</option>
+                                                <option value="BYN" <%= currentUser.currency === 'BYN' ? 'selected="true"' : '' %>>‭BYN - Br</option>
+                                                <option value="BZD" <%= currentUser.currency === 'BZD' ? 'selected="true"' : '' %>>‭BZD - BZ$</option>
+                                                <option value="CDF" <%= currentUser.currency === 'CDF' ? 'selected="true"' : '' %>>‭CDF - FC</option>
+                                                <option value="CHF" <%= currentUser.currency === 'CHF' ? 'selected="true"' : '' %>>‭CHF - CHF</option>
+                                                <option value="CLP" <%= currentUser.currency === 'CLP' ? 'selected="true"' : '' %>>‭CLP - $</option>
+                                                <option value="CNY" <%= currentUser.currency === 'CNY' ? 'selected="true"' : '' %>>‭CNY - ¥</option>
+                                                <option value="COP" <%= currentUser.currency === 'COP' ? 'selected="true"' : '' %>>‭COP - $</option>
+                                                <option value="CRC" <%= currentUser.currency === 'CRC' ? 'selected="true"' : '' %>>‭CRC - ₡</option>
+                                                <option value="CVE" <%= currentUser.currency === 'CVE' ? 'selected="true"' : '' %>>‭CVE - $</option>
+                                                <option value="CZK" <%= currentUser.currency === 'CZK' ? 'selected="true"' : '' %>>‭CZK - Kč</option>
+                                                <option value="DJF" <%= currentUser.currency === 'DJF' ? 'selected="true"' : '' %>>‭DJF - Fdj</option>
+                                                <option value="DKK" <%= currentUser.currency === 'DKK' ? 'selected="true"' : '' %>>‭DKK - kr.</option>
+                                                <option value="DOP" <%= currentUser.currency === 'DOP' ? 'selected="true"' : '' %>>‭DOP - RD$</option>
+                                                <option value="DZD" <%= currentUser.currency === 'DZD' ? 'selected="true"' : '' %>>‭DZD - د.ج.‏</option>
+                                                <option value="EGP" <%= currentUser.currency === 'EGP' ? 'selected="true"' : '' %>>‭EGP - ج.م.‏</option>
+                                                <option value="ERN" <%= currentUser.currency === 'ERN' ? 'selected="true"' : '' %>>‭ERN - Nfk</option>
+                                                <option value="ETB" <%= currentUser.currency === 'ETB' ? 'selected="true"' : '' %>>‭ETB - Br</option>
+                                                <option value="GEL" <%= currentUser.currency === 'GEL' ? 'selected="true"' : '' %>>‭GEL - ₾</option>
+                                                <option value="GHS" <%= currentUser.currency === 'GHS' ? 'selected="true"' : '' %>>‭GHS - GH¢</option>
+                                                <option value="GNF" <%= currentUser.currency === 'GNF' ? 'selected="true"' : '' %>>‭GNF - FG</option>
+                                                <option value="GTQ" <%= currentUser.currency === 'GTQ' ? 'selected="true"' : '' %>>‭GTQ - Q</option>
+                                                <option value="HKD" <%= currentUser.currency === 'HKD' ? 'selected="true"' : '' %>>‭HKD - HK$</option>
+                                                <option value="HNL" <%= currentUser.currency === 'HNL' ? 'selected="true"' : '' %>>‭HNL - L.</option>
+                                                <option value="HRK" <%= currentUser.currency === 'HRK' ? 'selected="true"' : '' %>>‭HRK - kn</option>
+                                                <option value="HUF" <%= currentUser.currency === 'HUF' ? 'selected="true"' : '' %>>‭HUF - Ft</option>
+                                                <option value="IDR" <%= currentUser.currency === 'IDR' ? 'selected="true"' : '' %>>‭IDR - Rp</option>
+                                                <option value="ILS" <%= currentUser.currency === 'ILS' ? 'selected="true"' : '' %>>‭ILS - ₪</option>
+                                                <option value="INR" <%= currentUser.currency === 'INR' ? 'selected="true"' : '' %>>‭INR - ₹</option>
+                                                <option value="IQD" <%= currentUser.currency === 'IQD' ? 'selected="true"' : '' %>>‭IQD - د.ع.‏</option>
+                                                <option value="IRR" <%= currentUser.currency === 'IRR' ? 'selected="true"' : '' %>>‭IRR - ريال</option>
+                                                <option value="ISK" <%= currentUser.currency === 'ISK' ? 'selected="true"' : '' %>>‭ISK - kr.</option>
+                                                <option value="JMD" <%= currentUser.currency === 'JMD' ? 'selected="true"' : '' %>>‭JMD - J$</option>
+                                                <option value="JOD" <%= currentUser.currency === 'JOD' ? 'selected="true"' : '' %>>‭JOD - د.ا.‏</option>
+                                                <option value="JPY" <%= currentUser.currency === 'JPY' ? 'selected="true"' : '' %>>‭JPY - ¥</option>
+                                                <option value="KES" <%= currentUser.currency === 'KES' ? 'selected="true"' : '' %>>‭KES - S</option>
+                                                <option value="KGS" <%= currentUser.currency === 'KGS' ? 'selected="true"' : '' %>>‭KGS - сом</option>
+                                                <option value="KHR" <%= currentUser.currency === 'KHR' ? 'selected="true"' : '' %>>‭KHR - KHR</option>
+                                                <option value="KMF" <%= currentUser.currency === 'KMF' ? 'selected="true"' : '' %>>‭KMF - CF</option>
+                                                <option value="KRW" <%= currentUser.currency === 'KRW' ? 'selected="true"' : '' %>>‭KRW - ₩</option>
+                                                <option value="KWD" <%= currentUser.currency === 'KWD' ? 'selected="true"' : '' %>>‭KWD - د.ك.‏</option>
+                                                <option value="KZT" <%= currentUser.currency === 'KZT' ? 'selected="true"' : '' %>>‭KZT - Т</option>
+                                                <option value="LBP" <%= currentUser.currency === 'LBP' ? 'selected="true"' : '' %>>‭LBP - ل.ل.‏</option>
+                                                <option value="LKR" <%= currentUser.currency === 'LKR' ? 'selected="true"' : '' %>>‭LKR - Rp</option>
+                                                <option value="LYD" <%= currentUser.currency === 'LYD' ? 'selected="true"' : '' %>>‭LYD - د.ل.‏</option>
+                                                <option value="MAD" <%= currentUser.currency === 'MAD' ? 'selected="true"' : '' %>>‭MAD - د.م.‏</option>
+                                                <option value="MDL" <%= currentUser.currency === 'MDL' ? 'selected="true"' : '' %>>‭MDL - lei</option>
+                                                <option value="MGA" <%= currentUser.currency === 'MGA' ? 'selected="true"' : '' %>>‭MGA - Ar</option>
+                                                <option value="MKD" <%= currentUser.currency === 'MKD' ? 'selected="true"' : '' %>>‭MKD - ден.</option>
+                                                <option value="MMK" <%= currentUser.currency === 'MMK' ? 'selected="true"' : '' %>>‭MMK - K</option>
+                                                <option value="MOP" <%= currentUser.currency === 'MOP' ? 'selected="true"' : '' %>>‭MOP - MOP$</option>
+                                                <option value="MUR" <%= currentUser.currency === 'MUR' ? 'selected="true"' : '' %>>‭MUR - Rs</option>
+                                                <option value="MXN" <%= currentUser.currency === 'MXN' ? 'selected="true"' : '' %>>‭MXN - $</option>
+                                                <option value="MYR" <%= currentUser.currency === 'MYR' ? 'selected="true"' : '' %>>‭MYR - RM</option>
+                                                <option value="MZN" <%= currentUser.currency === 'MZN' ? 'selected="true"' : '' %>>‭MZN - MT</option>
+                                                <option value="NAD" <%= currentUser.currency === 'NAD' ? 'selected="true"' : '' %>>‭NAD - $</option>
+                                                <option value="NGN" <%= currentUser.currency === 'NGN' ? 'selected="true"' : '' %>>‭NGN - ₦</option>
+                                                <option value="NIO" <%= currentUser.currency === 'NIO' ? 'selected="true"' : '' %>>‭NIO - C$</option>
+                                                <option value="NOK" <%= currentUser.currency === 'NOK' ? 'selected="true"' : '' %>>‭NOK - kr</option>
+                                                <option value="NPR" <%= currentUser.currency === 'NPR' ? 'selected="true"' : '' %>>‭NPR - रु</option>
+                                                <option value="NZD" <%= currentUser.currency === 'NZD' ? 'selected="true"' : '' %>>‭NZD - $</option>
+                                                <option value="OMR" <%= currentUser.currency === 'OMR' ? 'selected="true"' : '' %>>‭OMR - ر.ع.‏</option>
+                                                <option value="PAB" <%= currentUser.currency === 'PAB' ? 'selected="true"' : '' %>>‭PAB - B/.</option>
+                                                <option value="PEN" <%= currentUser.currency === 'PEN' ? 'selected="true"' : '' %>>‭PEN - S/.</option>
+                                                <option value="PHP" <%= currentUser.currency === 'PHP' ? 'selected="true"' : '' %>>‭PHP - P</option>
+                                                <option value="PKR" <%= currentUser.currency === 'PKR' ? 'selected="true"' : '' %>>‭PKR - Rs</option>
+                                                <option value="PLN" <%= currentUser.currency === 'PLN' ? 'selected="true"' : '' %>>‭PLN - zł</option>
+                                                <option value="PYG" <%= currentUser.currency === 'PYG' ? 'selected="true"' : '' %>>‭PYG - Gs</option>
+                                                <option value="QAR" <%= currentUser.currency === 'QAR' ? 'selected="true"' : '' %>>‭QAR - ر.ق.‏</option>
+                                                <option value="RON" <%= currentUser.currency === 'RON' ? 'selected="true"' : '' %>>‭RON - lei</option>
+                                                <option value="RSD" <%= currentUser.currency === 'RSD' ? 'selected="true"' : '' %>>‭RSD - Дин.</option>
+                                                <option value="RUB" <%= currentUser.currency === 'RUB' ? 'selected="true"' : '' %>>‭RUB - ₽</option>
+                                                <option value="RWF" <%= currentUser.currency === 'RWF' ? 'selected="true"' : '' %>>‭RWF - RWF</option>
+                                                <option value="SAR" <%= currentUser.currency === 'SAR' ? 'selected="true"' : '' %>>‭SAR - SAR</option>
+                                                <option value="SDG" <%= currentUser.currency === 'SDG' ? 'selected="true"' : '' %>>‭SDG - ج.س.‏</option>
+                                                <option value="SEK" <%= currentUser.currency === 'SEK' ? 'selected="true"' : '' %>>‭SEK - SEK</option>
+                                                <option value="SGD" <%= currentUser.currency === 'SGD' ? 'selected="true"' : '' %>>‭SGD - $</option>
+                                                <option value="SOS" <%= currentUser.currency === 'SOS' ? 'selected="true"' : '' %>>‭SOS - S</option>
+                                                <option value="SYP" <%= currentUser.currency === 'SYP' ? 'selected="true"' : '' %>>‭SYP - ل.س.‏</option>
+                                                <option value="THB" <%= currentUser.currency === 'THB' ? 'selected="true"' : '' %>>‭THB - ฿</option>
+                                                <option value="TND" <%= currentUser.currency === 'TND' ? 'selected="true"' : '' %>>‭TND - د.ت.‏</option>
+                                                <option value="TOP" <%= currentUser.currency === 'TOP' ? 'selected="true"' : '' %>>‭TOP - T$</option>
+                                                <option value="TRY" <%= currentUser.currency === 'TRY' ? 'selected="true"' : '' %>>‭TRY - TL</option>
+                                                <option value="TTD" <%= currentUser.currency === 'TTD' ? 'selected="true"' : '' %>>‭TTD - TT$</option>
+                                                <option value="TWD" <%= currentUser.currency === 'TWD' ? 'selected="true"' : '' %>>‭TWD - NT$</option>
+                                                <option value="TZS" <%= currentUser.currency === 'TZS' ? 'selected="true"' : '' %>>‭TZS - TSh</option>
+                                                <option value="UAH" <%= currentUser.currency === 'UAH' ? 'selected="true"' : '' %>>‭UAH - грн.</option>
+                                                <option value="UGX" <%= currentUser.currency === 'UGX' ? 'selected="true"' : '' %>>‭UGX - USh</option>
+                                                <option value="UYU" <%= currentUser.currency === 'UYU' ? 'selected="true"' : '' %>>‭UYU - $U</option>
+                                                <option value="UZS" <%= currentUser.currency === 'UZS' ? 'selected="true"' : '' %>>‭UZS - сўм</option>
+                                                <option value="VND" <%= currentUser.currency === 'VND' ? 'selected="true"' : '' %>>‭VND - ₫</option>
+                                                <option value="XAF" <%= currentUser.currency === 'XAF' ? 'selected="true"' : '' %>>‭XAF - F</option>
+                                                <option value="XOF" <%= currentUser.currency === 'XOF' ? 'selected="true"' : '' %>>‭XOF - F</option>
+                                                <option value="YER" <%= currentUser.currency === 'YER' ? 'selected="true"' : '' %>>‭YER - ر.ي.‏</option>
+                                                <option value="ZAR" <%= currentUser.currency === 'ZAR' ? 'selected="true"' : '' %>>‭ZAR - R</option>
+                                            </optgroup>
+                                        </select>
+                                    </fieldset>
+                                </div>
+                            </div>
                         </div>
                         <div class="row">
                             <div class="col-lg-6">

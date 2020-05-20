@@ -84,11 +84,13 @@ module.exports = {
   async updateProfile (req, res, next) {
     const {
       username,
-      email
+      email,
+      currency
     } = req.body;
     const { user } = res.locals;
     if (username) user.username = username;
     if (email) user.email = email;
+    if (currency) user.currency = currency;
     if (req.file) {
       if (user.image.public_id) await cloudinary.v2.uploader.destroy(user.image.public_id);
       const { secure_url, public_id } = req.file;
@@ -185,20 +187,24 @@ module.exports = {
     res.redirect('/');
   },
 
-  getCheckout (req, res, next) {
-    res.render('checkout', { amount: 20, title: 'Post Checkout' } )
+  async getCheckout (req, res, next) {
+    try {
+      const post = await Post.findById(req.query.post);
+      res.render('checkout', { post, title: 'Post Checkout' } )
+    }
+    catch {
+      req.session.error = 'This post does not exist';
+      res.redirect('/posts')
+    }
   },
 
   async postPay (req, res, next) {
-
     const { paymentMethodId, items, currency } = req.body;
-  
-    const amount = 2000;
-  
+    const post = await Post.findById(req.headers.post);
     try {
       // Create new PaymentIntent with a PaymentMethod ID from the client.
       const intent = await stripe.paymentIntents.create({
-        amount: amount,
+        amount: post.price,
         currency: currency,
         payment_method: paymentMethodId,
         error_on_requires_action: true,
@@ -221,7 +227,14 @@ module.exports = {
     }
   },
 
-  getPaid (req, res, next) {
-    res.render('paid', { amount: req.query.amount } )
+  async getPaid (req, res, next) {
+    try{
+      const post = await Post.findById(req.query.post);
+      res.render('paid', { post } );
+    }
+    catch {
+      req.session.error = 'This post does not exist';
+      res.redirect('/posts')
+    }
   },
 }
