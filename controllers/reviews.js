@@ -5,6 +5,10 @@ module.exports = {
 
     async reviewCreate(req, res, next) {
         let post = await Post.findById(req.params.id).populate('reviews').exec();
+        if (post.author.equals(req.user._id)) {
+            req.session.error = "You can't post a review for your own post!"
+            return res.redirect(`/posts/${post.id}`)
+        }
         let haveReviewed = post.reviews.filter(review => {
             return review.author.equals(req.user._id);
         });

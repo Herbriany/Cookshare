@@ -80,7 +80,15 @@
         </div>
     </div>
     <div class="spacer">
-        <%  if (currentUser) { %>
+        <%  if (!currentUser) { %>
+        <div class="row">
+            <div class="col-md-4">
+                <h2 class="title"><a href="/login?returnTo=true">Write a Review</a></h2>
+            </div>
+        </div>
+        <% } else if (currentUser && post.author.equals(currentUser._id)) { %>
+
+        <% } else { %>
         <div class="contact-box p-r-40">
             <h2 class="title">Write a Review</h2>
             <form data-aos="fade-left" data-aos-duration="1200" action="/posts/<%= post.id %>/reviews" method="POST">
@@ -114,12 +122,6 @@
                     </div>
                 </div>
             </form>
-        </div>
-        <% } else { %>
-        <div class="row">
-            <div class="col-md-4">
-                <h2 class="title"><a href="/login?returnTo=true">Write a Review</a></h2>
-            </div>
         </div>
         <% } %>
     </div>

@@ -6,6 +6,7 @@ postEditForm.addEventListener('submit', event => {
     let newTotal = existingImg + imageUpload - deletedImg;
     if(newTotal > 4) {
         event.preventDefault();
-        alert(`You need to remove at least ${newTotal -4} more image${newTotal === 5? '': 's'}`);
+        let textSection = document.getElementById("text-section");
+        textSection.innerText = `You need to remove at least ${newTotal -4} more image${newTotal === 5? '': 's'}`;
     }
 });

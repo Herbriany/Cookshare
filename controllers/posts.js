@@ -59,7 +59,7 @@ module.exports = {
         // })
 
         // Promise.all(newPrices).then(prices => res.render('posts/index', { posts, mapBoxToken, prices, symbol, title: 'Posts Index' }));
-        var fetchURL = `http://data.fixer.io/api/latest?access_key=${fixerToken}&symbols=`
+        var fetchURL = `http://data.fixer.io/api/latest?access_key=${fixerToken}&symbols=${userCurrency},`
         posts.docs.forEach(post => {
             fetchURL += post.currency + ',';
         })
