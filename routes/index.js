@@ -70,18 +70,12 @@ router.get('/reset/:token', asyncErrorHandler(getReset));
 router.put('/reset/:token', asyncErrorHandler(putReset));
 
 /* GET Checkout */ 
-router.get('/checkout', 
-// isLoggedIn, 
-asyncErrorHandler(getCheckout));
+router.get('/checkout', isLoggedIn, asyncErrorHandler(getCheckout));
 
 /* POST Pay */
-router.post("/pay", 
-// isLoggedIn,
-asyncErrorHandler(postPay));
+router.post("/pay", isLoggedIn, asyncErrorHandler(postPay));
 
 /* Get Paid */  
-router.get('/paid', 
-// isLoggedIn,
-asyncErrorHandler(getPaid));
+router.get('/paid', isLoggedIn, asyncErrorHandler(getPaid));
 
 module.exports = router;

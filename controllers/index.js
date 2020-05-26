@@ -1,6 +1,7 @@
 const User = require('../models/user');
 const Post = require('../models/post');
 const passport = require('passport');
+const fixerToken = process.env.FIXER_API_KEY;
 const mapBoxToken = process.env.MAPBOX_TOKEN;
 const util = require('util');
 const { cloudinary } = require('../cloudinary');
@@ -11,6 +12,8 @@ sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 // Set your secret key. Remember to switch to your live secret key in production!
 // See your keys here: https://dashboard.stripe.com/account/apikeys
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+const currencies = require('../currencies');
+const fetch = require("node-fetch");
 
 module.exports = {
 
@@ -188,9 +191,37 @@ module.exports = {
   },
 
   async getCheckout (req, res, next) {
+    
     try {
       const post = await Post.findById(req.query.post);
-      res.render('checkout', { post, title: 'Post Checkout' } )
+
+      // convert currency if currentUser and post currencies are different
+      var newPrice;
+      var symbol = currencies[req.user.currency]['symbol_native'];
+
+      if (req.user.currency !== post.currency) {
+          await fetch(`http://data.fixer.io/api/latest?access_key=${fixerToken}&symbols=${req.user.currency},${post.currency}&format=1`)
+          .then(response => {
+              if (response.ok) {
+                  return response.json();
+              }
+              else {
+                  res.locals.error = 'Error retrieving posts';
+                  return res.redirect('/');
+              }
+          })
+          .then(result =>{
+              let postCurrency = result.rates[post.currency];
+              let currentUserCurrency = result.rates[req.user.currency];
+              let convertedCurrencyFloat = ((currentUserCurrency/postCurrency)*post.price);
+              newPrice = convertedCurrencyFloat.toFixed(currencies[req.user.currency]['decimal_digits']);
+          })
+      }
+      else {
+          newPrice = post.price.toFixed(currencies[post.currency]['decimal_digits']);
+      }
+      
+      res.render('checkout', { post, symbol, newPrice, title: 'Post Checkout' } )
     }
     catch {
       req.session.error = 'This post does not exist';
@@ -204,8 +235,8 @@ module.exports = {
     try {
       // Create new PaymentIntent with a PaymentMethod ID from the client.
       const intent = await stripe.paymentIntents.create({
-        amount: post.price,
-        currency: currency,
+        amount: (post.price * 100),
+        currency: post.currency,
         payment_method: paymentMethodId,
         error_on_requires_action: true,
         confirm: true
@@ -230,7 +261,11 @@ module.exports = {
   async getPaid (req, res, next) {
     try{
       const post = await Post.findById(req.query.post);
-      res.render('paid', { post } );
+      const newPrice = req.query.price;
+      const symbol = req.query.symbol;
+      post.amount -= 1;
+      await post.save();
+      res.render('paid', { post, newPrice, symbol } );
     }
     catch {
       req.session.error = 'This post does not exist';

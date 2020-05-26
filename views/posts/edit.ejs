@@ -16,7 +16,7 @@
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group m-t-15">
-                                    <label for="price">Price (<%= currentUser.currency %>):<small><a href="/profile">Change currency</a></small></label>
+                                    <label for="price">Price (<%= post.currency %>):</label>
                                     <input type="number" name="post[price]" placeholder="Price" step="<%= step %>" id="price" value="<%= post.price %>" class="form-control" min="<%= step %>">
                                 </div>
                             </div>
@@ -29,12 +29,18 @@
                                 </div>
                             </div>
                             <div class="col-lg-6">
-                                <label for="description">Food description:</small></label>
-                                <textarea name="post[description]" placeholder="Description" class="form-control"><%= post.description %></textarea>
+                                <div class="form-group m-t-15">
+                                    <label for="amount">Amount of items to sell:</label>
+                                    <input type="number" name="post[amount]" placeholder="<%= post.amount %>" step="1" id="amount" class="form-control" min="1" required></input>
+                                </div>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-lg-8">
+                            <div class="col-lg-6">
+                                <label for="description">Food description:</small></label>
+                                <textarea name="post[description]" placeholder="Description" class="form-control"><%= post.description %></textarea>
+                            </div>
+                            <div class="col-lg-6">
                                 <label for="imageUpload">Food images<small> (max 4):</small></label>
                                 <input type="file" id="imageUpload" accept="images/*" name="images" multiple />
                                 <div class="color-red" id="text-section"></div>

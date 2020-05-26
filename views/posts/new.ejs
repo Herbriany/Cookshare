@@ -27,10 +27,14 @@
                                 </div>
                             </div>
                             <div class="col-lg-4">
-                                <label for="description">Food description:</small></label>
+                                <label for="description">Food description:</label>
                                 <textarea name="post[description]" placeholder="Description" id="description" class="form-control"></textarea>
                             </div>
-                            <div class="col-lg-8">
+                            <div class="col-lg-4">
+                                <label for="amount">Amount of items to sell:</label>
+                                <input type="number" name="post[amount]" placeholder="Amount to sell" step="1" id="amount" class="form-control" min="1" required></input>
+                            </div>
+                            <div class="col-lg-4">
                                 <label for="images">Food images<small> (max 4):</small></label>
                                 <input type="file" accept="images/*" name="images" id="images" multiple />
                                 <div class="color-red" id="text-section"></div>

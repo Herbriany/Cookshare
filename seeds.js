@@ -25,7 +25,8 @@ async function seedPosts() {
 				{
 					url: 'https://res.cloudinary.com/dvjsq7rnx/image/upload/v1588601938/cookshare/stocking_filler_wzrnul.jpg'
 				}
-			]
+			],
+			amount: 10
 		}
 		let post = new Post(postData);
 		post.properties.description = `<strong><a href="/posts/${post._id}">${title}</a></strong><p>${post.location}</p><p>${description.substring(0, 20)}...</p>`;

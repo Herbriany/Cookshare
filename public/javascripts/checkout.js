@@ -6,7 +6,7 @@ function errorHandler(err){
 
 var orderData = {
   items: [{ id: "cookshare-product-payment" }],
-  currency: "usd"
+  currency: post.currency
 };
 
 var stripe = Stripe("pk_test_AWp2bymA8nagxKyCil9n2rht002sJj4p7R");
@@ -50,7 +50,7 @@ form.addEventListener('submit', function(ev) {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            "post": post._id
+            "post": post._id,
           },
           body: JSON.stringify(orderData)
         });
@@ -66,7 +66,8 @@ form.addEventListener('submit', function(ev) {
       // redirect to product page with success flash message
       console.log('Payment completed')
       changeLoadingState(false);
-      window.location.href = '/paid?post='+post._id;
+      
+      window.location.href = '/paid?post='+post._id+'&price='+newPrice+'&symbol='+symbol;
     }
   });
 });

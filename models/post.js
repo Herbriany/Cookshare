@@ -34,7 +34,8 @@ const PostSchema = new Schema({
             ref: 'Review'
         }
     ],
-    avgRating: { type: Number, default: 0}
+    avgRating: { type: Number, default: 0},
+    amount: Number
 });
 
 PostSchema.pre('remove', async function() {
