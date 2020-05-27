@@ -20,7 +20,8 @@ module.exports = {
   async landingPage(req, res, next) {
     const posts = await Post.find({}).sort('-_id').exec();
     const recentPosts = posts.slice(0, 3);
-    res.render('index', { posts, mapBoxToken, recentPosts, title: 'Cookshare - Home' });
+
+    res.render('index', { posts, mapBoxToken, recentPosts,  title: 'Cookshare - Home' });
   },
 
   getRegister(req, res, next) {

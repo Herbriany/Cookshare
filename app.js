@@ -49,9 +49,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(methodOverride('_method'));
 
-// moment
-app.locals.moment = require('moment');
-
 // configure passport and sessions
 app.use(session({
   secret: 'app play around',

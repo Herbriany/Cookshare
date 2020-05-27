@@ -97,6 +97,19 @@ module.exports = {
 
 
     async postCreate(req, res, next) {
+        currentDate = new Date();
+        let dateArray = [];
+        // postDate = currentDate.toLocaleString('default', { month: 'short'})
+        // postDate += ',' + currentDate.getDate();
+        // req.body.post.date = postDate;
+        let postMonth = currentDate.toLocaleString('default', { month: 'short'})
+        let postDate = currentDate.getDate();
+        req.body.post.date = [];
+        req.body.post.date.push({
+            month: postMonth,
+            day: postDate
+        })
+
         if (req.body.price <= 0) {
             res.locals.error = 'Price must be a positive number';
             return res.redirect(`/posts/new`);
@@ -127,6 +140,7 @@ module.exports = {
 
 
     async postShow(req, res, next) {
+        
         let post = await Post.findById(req.params.id).populate({
             path: 'reviews',
             options: { sort: { '_id': -1}},
@@ -137,7 +151,7 @@ module.exports = {
         });
         // const floorRating = post.calculateAvgRating();
         const floorRating = post.avgRating;
-        
+
         // convert currency if currentUser and post currencies are different
         var newPrice;
         var userCurrency;

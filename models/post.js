@@ -9,6 +9,7 @@ const PostSchema = new Schema({
     currency: String,
     description: String,
     images: [ { url: String, public_id: String } ],
+    date: [ { month: String, day: String } ],
     location: String,
     geometry: {
         type: {
