@@ -195,7 +195,10 @@ module.exports = {
     
     try {
       const post = await Post.findById(req.query.post);
-
+      if (post.amount <=0 ) {
+        req.session.error = 'This product is currently sold out';
+        return res.redirect('back');
+      }
       // convert currency if currentUser and post currencies are different
       var newPrice;
       var symbol = currencies[req.user.currency]['symbol_native'];
@@ -207,7 +210,7 @@ module.exports = {
                   return response.json();
               }
               else {
-                  res.locals.error = 'Error retrieving posts';
+                  req.session.error = 'Error retrieving posts';
                   return res.redirect('/');
               }
           })
@@ -262,8 +265,9 @@ module.exports = {
   async getPaid (req, res, next) {
     try{
       const post = await Post.findById(req.query.post);
-      const newPrice = req.query.price;
-      const symbol = req.query.symbol;
+      const newPrice = req.cookies.price;
+      const symbol = currencies[req.user.currency]['symbol_native'];
+      res.clearCookie('price')
       post.amount -= 1;
       await post.save();
       res.render('paid', { post, newPrice, symbol } );

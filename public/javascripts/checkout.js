@@ -66,8 +66,8 @@ form.addEventListener('submit', function(ev) {
       // redirect to product page with success flash message
       console.log('Payment completed')
       changeLoadingState(false);
-      
-      window.location.href = '/paid?post='+post._id+'&price='+newPrice+'&symbol='+symbol;
+      document.cookie = `price=${newPrice}`;
+      window.location.href = '/paid?post='+post._id;
     }
   });
 });

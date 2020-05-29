@@ -88,6 +88,13 @@
                     </div>
                 </div>
             <% } else { %>
+                <% if (post.amount <= 0) { %>
+                <div class="row m-t-15 m-b-15">
+                    <div class="col-md-3">
+                        <h2 class="title color-red">Item currently sold out!</h2>
+                    </div>
+                </div>
+                <% } else { %>
                 <div class="row m-t-15 m-b-15">
                     <div class="col-md-1">
                         <a href="/checkout?post=<%= post.id%>">
@@ -95,6 +102,7 @@
                         </a>
                     </div>
                 </div>
+                <% } %>
                 <div class="contact-box p-r-40">
                     <h2 class="title">Write a Review</h2>
                     <form data-aos="fade-left" data-aos-duration="1200" action="/posts/<%= post.id %>/reviews" method="POST">
